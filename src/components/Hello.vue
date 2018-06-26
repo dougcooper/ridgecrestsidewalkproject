@@ -1,17 +1,16 @@
 <template>
   <div>
-    <b-navbar toggleable="md" 
+    <b-navbar toggleable="lg" 
               type="dark" 
               variant="primary" 
               sticky="true">
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-      <!-- <b-navbar-brand href="#">NavBar</b-navbar-brand> -->
       <b-collapse is-nav id="nav_collapse">
         <b-navbar-nav class="mx-auto p-3">
-          <b-nav-item v-scroll-to="{el: '#rcsp-issues',   offset: function(){return -100;}}">
+          <b-nav-item v-scroll-to="{el: '#rcsp-issues',   offset: function(){return -10*vh2px('vh');}}">
             <i class="fa fa-exclamation-triangle fa-lg"></i> Issues
           </b-nav-item>
-          <b-nav-item v-scroll-to="{el: '#rcsp-benefits', offset: -100}">
+          <b-nav-item v-scroll-to="{el: '#rcsp-benefits', offset: -0}">
             <i class="fa fa-thumbs-up fa-lg"></i> Benefits
           </b-nav-item>
           <b-nav-item v-scroll-to="{el: '#rcsp-map',      offset: -100}">
@@ -32,7 +31,7 @@
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-    <b-jumbotron fluid class="text-center align-text-bottom" 
+    <b-jumbotron fluid class="text-center" 
                 style="text-shadow: 1px 1px 2px #333;"
                 header-level="3" 
                 lead="" 
@@ -91,7 +90,7 @@
     <br><br>
     <b-container id="rcspsupport">
       <!-- <h2 class="text-center">Take the Next Step!</h2> -->
-      <h1 class="text-center">Let us know if you're interested, and we'll get in touch with you.</h1>
+      <h2 class="text-center">Let us know if you're interested, and we'll get in touch with you.</h2>
       <form id="contact_form" style="width:90%;" class="container" v-on:submit.prevent="submitForm" action="">
         <div class="form-group">
           <label for="name">Name:</label>
@@ -114,12 +113,12 @@
     <footer class="page-footer font-small blue pt-4 mt-4">
       <ul class="list-unstyled list-inline text-center">
         <li class="list-inline-item">
-          <button type="button" class="btn btn-primary btn-lg">
+          <button type="button" class="btn btn-primary btn-lg btn-circle">
             <i class="fa fa-facebook fa-lg"> </i>
           </button>
         </li>
         <li class="list-inline-item">
-          <button type="button" class="btn btn-primary btn-lg">
+          <button type="button" class="btn btn-primary btn-lg btn-circle">
             <i class="fa fa-twitter fa-lg"></i>
           </button>
         </li>
@@ -140,6 +139,7 @@
   import Carousel from '@/components/Carousel'
   import Features from '@/components/Features'
   import theprogress from '@/components/Progress'
+  var toPX = require('to-px')
   // import ridgecrestimg from '@/assets/ridgecrest.jpg'
   
   export default {
@@ -188,6 +188,16 @@
         }, function() {
           alert('Form submission failed')
         })
+      },
+      vh2px: function(value) {
+        // var w = window
+        // var d = document
+        // var e = d.documentElement
+        // var g = d.getElementsByTagName('body')[0]
+        // var y = w.innerHeight || e.clientHeight || g.clientHeight
+
+        // var result = (y * value) / 100
+        return toPX(value)
       }
     },
     components: {
@@ -212,13 +222,13 @@
   }
 
   .btn-circle {
-    width: 30px;
-    height: 30px;
-    padding: 6px 0px;
-    border-radius: 15px;
-    text-align: center;
-    font-size: 12px;
-    line-height: 1.42857;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    /* padding: 6px 0px; */
+    /* text-align: center; */
+    /* font-size: 12px; */
+    /* line-height: 1.42857; */
 }
 
 .jumbotron{
@@ -231,7 +241,6 @@ background: linear-gradient(
       ),url("../assets/ridgecrest.jpg");
 background-position: center; 
 background-size: cover;
-/* opacity: .5; */
 }
 
 .navbar-nav > li{

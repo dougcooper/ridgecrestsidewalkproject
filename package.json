@@ -14,8 +14,11 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
+    "bootstrap": "^4.1.1",
     "bootstrap-material-design": "^4.1.1",
+    "bootstrap-vue": "^2.0.0-rc.11",
     "popper.js": "^1.12.9",
+    "to-px": "^1.0.1",
     "vue": "^2.5.2",
     "vue-cute-timeline": "^1.2.4",
     "vue-radial-progress": "^0.2.10",

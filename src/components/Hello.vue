@@ -1,136 +1,169 @@
 <template>
-  <div>
-    <b-navbar toggleable="lg" 
-              type="dark" 
-              variant="primary" 
-              sticky="true">
-      <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-      <b-collapse is-nav id="nav_collapse">
-        <b-navbar-nav class="mx-auto p-3">
-          <b-nav-item v-scroll-to="{el: '#rcsp-issues',   offset: function(){return -10*vh2px('vh');}}">
-            <i class="fa fa-exclamation-triangle fa-lg"></i> Issues
-          </b-nav-item>
-          <b-nav-item v-scroll-to="{el: '#rcsp-benefits', offset: -0}">
-            <i class="fa fa-thumbs-up fa-lg"></i> Benefits
-          </b-nav-item>
-          <b-nav-item v-scroll-to="{el: '#rcsp-map',      offset: -100}">
-            <i class="fa fa-map-marker fa-lg"></i> Map
-          </b-nav-item>
-          <b-nav-item v-scroll-to="{el: '#rcsp-process',  offset: -100}">
-            <i class="fa fa-list-ol fa-lg"></i> Process
-          </b-nav-item>
-          <b-nav-item v-scroll-to="{el: '#rcsp-progress', offset: -100}">
-            <i class="fa fa-spinner fa-lg"></i> Progress
-          </b-nav-item>
-          <b-nav-item v-scroll-to="{el: '#rcsp-info',     offset: -100}">
-            <i class="fa fa-info-circle fa-lg"></i> Info
-          </b-nav-item>
-          <b-nav-item v-scroll-to="{el: '#rcspsupport',   offset: -100}">
-            <i class="fa fa-life-ring fa-lg"></i> Support
-          </b-nav-item>
-        </b-navbar-nav>
-      </b-collapse>
-    </b-navbar>
-    <b-jumbotron fluid class="text-center" 
-                style="text-shadow: 1px 1px 2px #333;"
-                header-level="3" 
-                lead="" 
-                text-variant="white">
-      <template id="j-header" slot="header" class="">Sidewalk Project</template>
-    </b-jumbotron>
-    <!-- <b-img fluid style="height: 100vh;" 
-    :src="require('@/assets/ridgecrest.jpg')"><p>test</p>test</b-img> -->
-    <br><br>
-    <b-container  fluid class="px-0" id="rcsp-issues">
-      <!-- <h2 class="text-center p-3">Issues</h2> -->
-      <carousel/>
-    </b-container>
-    <br><br>
-    <b-container fluid class="px-0" id="rcsp-benefits">
-      <!-- <h2 class="text-center p-3">Benefits</h2> -->
-      <features/>
-    </b-container>
-    <br><br>
-    <b-container fluid class="pt-50 px-0" id="rcsp-map">
-      <!-- <h2 class="text-center p-3">Map</h2> -->
-      <b-embed type="iframe" aspect="4by3" src="https://www.google.com/maps/d/u/0/embed?mid=15U0H8mVvYEiDeIDQaSW3iyQtWsA6Ikdq"></b-embed>
-    </b-container>
-    <br><br>
-    <b-container id="rcsp-process">
-      <!-- <h2 class="text-center p-3">How do we make this happen?</h2> -->
-      <timeline class="mx-auto p-3 w-50">
-        <!-- <timeline-title>title</timeline-title> -->
-        <timeline-item color="#9dd8e0" style="text-align: left;">Step 1. Identify Parcel Owners</timeline-item>
-        <timeline-item color="#9dd8e0">Step 2. Get the Word Out</timeline-item>
-        <timeline-item color="#9dd8e0">Step 3. Obtain Owner Signature</timeline-item>
-        <timeline-item color="#9dd8e0">Step 4. Submit Petitions</timeline-item>
-        <timeline-item color="#9dd8e0">Step 5. Conduct Analysis</timeline-item>
-        <timeline-item color="#9dd8e0">Step 6. Participate in Hearing</timeline-item>
-        <timeline-item color="#9dd8e0">Step 7. Receive Approval</timeline-item>
-      </timeline>
-    </b-container>
-    <br><br>
-    <b-container id="rcsp-progress">
-      <!-- <h2 class="text-center p-3">Progress</h2> -->
-      <theprogress/>
-    </b-container>
-    <br><br>
-    <b-list-group id="rcsp-info" style="" class="mx-auto px-3">
-      <!-- <h2 class="text-center p-3">Additional Information</h2> -->
-      <b-list-group-item>The sidewalk doesn’t have to be on both sides of the street.</b-list-group-item>
-      <b-list-group-item>The project can be scoped to a portion of the overall goal.</b-list-group-item>
-      <b-list-group-item>If it costs too much after engineering analysis, you don’t have to pay.</b-list-group-item>
-      <b-list-group-item>New Copley subdivisions are beginning to require sidewalks.</b-list-group-item>
-      <b-list-group-item>Copley is embarking on a “Complete Streets” effort: proposing streets that are inclusive of pedestrians, cyclists, and people in wheelchairs.</b-list-group-item>
-      <b-list-group-item>Cost is attributed to square footage using depth, length and width.</b-list-group-item>
-      <b-list-group-item>Every intersection requires handicap cross sections.</b-list-group-item>
-      <b-list-group-item>If any parcel has a hill, right-of-way may have to be obtained.</b-list-group-item>
-      <b-list-group-item>Assessment paid by land owners to Town of Copley.</b-list-group-item>
-    </b-list-group>
-    <br><br>
-    <b-container id="rcspsupport">
-      <!-- <h2 class="text-center">Take the Next Step!</h2> -->
-      <h2 class="text-center">Let us know if you're interested, and we'll get in touch with you.</h2>
-      <form id="contact_form" style="width:90%;" class="container" v-on:submit.prevent="submitForm" action="">
-        <div class="form-group">
-          <label for="name">Name:</label>
-          <!-- v-model link to the model (i.e. pieces of the data section of vue.js) -->
-          <!-- v-on lets us run methods from vue.js : this one is v-on:blur for the blur event -->
-          <!--    blur just means that the field no longer has 'focus' -->
-          <input v-model="name" v-on:blur="isValidName" class="form-control" name="name" type="text" />
+  <b-card no-body>
+    <b-card-body id="nav-scroller" ref="content" style="position:relative; height:98vh; overflow-y:scroll;" class="p-0">
+      <b-jumbotron fluid
+                  class="m-0 text-center" 
+                  style="position:relative; font-family: Arial, Helvetica, sans-serif" 
+                  header="Ridge Crest Sidewalk Project" 
+                  header-level="3"
+                  bg-variant="dark" text-variant="light">
+                  <h3 :slot="lead">An effort to complete the sidewalk along Ridge Crest Drive and adjacent streets</h3>
+                  <p>Scroll down to learn more</p>
+                  <div align="center" class="">
+                    <b-button @click="scrollTo('#rcsp-issues')" class="mb-4">
+                      <img :src="require('@/components/circle.png')" width="50" height="50"/>
+                    </b-button>
+                  </div>
+      </b-jumbotron>
+      <b-navbar toggleable="sm" sticky="true" type="dark" variant="dark" style=";" class="" >
+        <b-navbar-brand><b-img :src="require('@/components/ridge_crest_logo2.svg')" width="100" height="50" ></b-img></b-navbar-brand>
+        <h3 v-if="isMobile" class="text-white text-canter" >{{activeNavItem}}</h3>
+        <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
+        <b-collapse is-nav id="nav_collapse">
+          <b-navbar-nav fill pills v-b-scrollspy:nav-scroller class="" style="">
+            <b-nav-item href="#rcsp-issues" class="">
+              <i class="fa fa-exclamation-triangle fa-lg"></i> Issues
+            </b-nav-item>
+            <b-nav-item href="#rcsp-benefits">
+              <i class="fa fa-thumbs-up fa-lg"></i> Benefits
+            </b-nav-item>
+            <b-nav-item href="#rcsp-map">
+              <i class="fa fa-map-marker fa-lg"></i> Map
+            </b-nav-item>
+            <b-nav-item href="#rcsp-process">
+              <i class="fa fa-list-ol fa-lg"></i> Process
+            </b-nav-item>
+            <b-nav-item href="#rcsp-progress">
+              <i class="fa fa-spinner fa-lg"></i> Progress
+            </b-nav-item>
+            <b-nav-item href="#rcsp-faq">
+              <i class="fa fa-question-circle fa-lg"></i> FAQ
+            </b-nav-item>
+            <b-nav-item href="#rcsp-info">
+              <i class="fa fa-info-circle fa-lg"></i> Info
+            </b-nav-item>
+            <b-nav-item href="#rcsp-support">
+              <i class="fa fa-life-ring fa-lg"></i> Support
+            </b-nav-item>
+          </b-navbar-nav>
+        </b-collapse>
+      </b-navbar>
+      <b-container  fluid class="px-0" id="rcsp-issues" name="Issues">
+        <br><br><br>
+        <carousel/>
+      </b-container>
+      <b-container fluid class="px-0" id="rcsp-benefits" name="Benefits" >
+        <br><br><br>
+        <features/>
+      </b-container>
+      <b-container fluid class="px-0" id="rcsp-map" name="Map" >
+        <br><br><br><br>
+        <b-embed style="" id="gmap" type="iframe" aspect="" src="https://www.google.com/maps/d/u/0/embed?mid=15U0H8mVvYEiDeIDQaSW3iyQtWsA6Ikdq"></b-embed>
+      </b-container>
+      <b-container id="rcsp-process" name="Process" >
+        <br><br><br>
+        <timeline class="mx-auto" style="width: 200px;">
+          <timeline-item class="ml-3" v-for="(action,index) in actions" :key="action.id">
+            <i slot="others" class="fas fa-2x" :class="action.icon"></i>
+            <b-container>
+              <b-row class="font-italic" >Step {{index+1}}</b-row>
+              <b-row>{{action.item}}</b-row>
+            </b-container>
+          </timeline-item>
+        </timeline>
+      </b-container>
+      <b-container id="rcsp-progress" class="p-3" name="Progress" >
+        <br><br><br><br>
+        <div class="row p-3">
+          <div class="col-sm text-center" v-for="location in progress" :key="location.id">
+            <vue-circle :progress="location.completed" 
+                        :size="100" 
+                        :reverse="false" 
+                        line-cap="round" 
+                        :fill="fill" 
+                        empty-fill="rgba(0, 0, 0, .1)" 
+                        :animation-start-value="0.0" 
+                        :start-angle="0" 
+                        insert-mode="append" 
+                        :thickness="5" 
+                        :show-percent="true" 
+                        @vue-circle-progress="progress"
+                        @vue-circle-end="progress_end">
+            </vue-circle>
+            <p>{{location.street}}</p>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input v-model="email" v-on:blur="isValidEmail" class="form-control" name="email" type="email" />
+        <br><br>
+      </b-container>
+      <b-container fluid id="rcsp-faq" class="" style="background-color: white;" name="FAQ" >
+        <br><br><br><br>
+        <v-collapse-group :onlyOneActive="true" class="list-group">
+          <v-collapse-wrapper class="list-group-item list-group-item-action" v-for="qa in questions" :key="qa.id" v-on:onStatusChange="qa.toggled=!qa.toggled">
+              <div v-collapse-toggle>
+                  <i v-bind:class="{'fa-rotate-90': qa.toggled}" class="fas fa-angle-right fa-lg"/> {{qa.question}}
+              </div>
+              <div class="font-italic" v-collapse-content>
+                <br>
+                  {{qa.answer}}
+              </div>
+          </v-collapse-wrapper>
+        </v-collapse-group>
+        <br><br><br><br>
+      </b-container>
+      <b-container fluid id="rcsp-info" name="Info" >
+        <br><br><br><br>
+        <b-list-group>
+          <b-list-group-item href="#" v-for="item in info" :key="item.id">{{item.message}}</b-list-group-item>
+        </b-list-group>
+        <br><br><br><br>
+      </b-container>
+      <b-container fluid id="rcsp-support" class="bg-dark text-white" style="" name="Support" >
+        <br><br><br><br>
+        <h2 class="text-center">Let us know if you're interested?</h2>
+        <p class="text-center">Questions, comments and concerns are welcome</p>
+        <b-form id="contact_form" class="mx-auto" style="width:90%;" @submit="submitForm" action="">
+          <b-form-group class="" label="Name:" label-for="name">
+            <b-form-input required v-model="form.name" :state="isValidName" name="name" type="text" placeholder="Enter you name"/>
+          </b-form-group>
+          <b-form-group class="form-group" label="Email" label-for="email">
+            <b-form-input required v-model="form.email" :state="isValidEmail" name="email" type="email" placeholder="youremail@domain"/>
+          </b-form-group>
+          <b-form-group class="form-group" label="Message">
+            <b-form-textarea required v-model="form.message" :state="isValidMessage" name="message" :rows="6" :max-rows="12" class="" ></b-form-textarea>
+          </b-form-group>
+          <b-button type="submit" class="btn btn-dark">Send</b-button>
+        </b-form>
+        <br>
+      </b-container>
+      <footer class="page-footer font-small bg-dark">
+        <br>
+        <ul class="list-unstyled list-inline text-center">
+          <li class="list-inline-item">
+            <b-button class="btn btn-dark btn-lg btn-circle" href="https://fb.me/rcspcopley">
+              <i class="fab fa-facebook-f fa-lg"> </i>
+            </b-button>
+          </li>
+          <li class="list-inline-item">
+            <b-button class="btn btn-dark btn-lg btn-circle" href="https://twitter.com/rcsp7">
+              <i class="fab fa-twitter fa-lg"></i>
+            </b-button>
+          </li>
+          <li class="list-inline-item">
+            <b-button class="btn btn-dark btn-lg btn-circle" href="https://plus.google.com/u/2/109929461810031001399">
+              <i class="fab fa-google-plus-g fa-lg"></i>
+            </b-button>
+          </li>
+        </ul>
+        <div class="footer-copyright text-center py-3">
+          <p class="text-white">Ridge Crest Sidewalk Project</p>
         </div>
-        <div class="form-group">
-          <label for="message">Message <small>(<span>{{ message.length }}</span> / <span>{{ maxLength }}</span>)</small></label>
-          <textarea v-model="message" v-on:blur="isValidMessage" class="form-control" name="message"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Send</button>
-      </form>
-    </b-container>
-    <footer class="page-footer font-small blue pt-4 mt-4">
-      <ul class="list-unstyled list-inline text-center">
-        <li class="list-inline-item">
-          <button type="button" class="btn btn-primary btn-lg btn-circle">
-            <i class="fa fa-facebook fa-lg"> </i>
-          </button>
-        </li>
-        <li class="list-inline-item">
-          <button type="button" class="btn btn-primary btn-lg btn-circle">
-            <i class="fa fa-twitter fa-lg"></i>
-          </button>
-        </li>
-      </ul>
-      <div class="footer-copyright text-center py-3">
-        <p>© Copyright 2017 Ridge Crest Sidewalk Project</p>
-      </div>
-    </footer>
-  </div>
+      </footer>
+      
+    </b-card-body>
+  </b-card>
 </template>
 
-<script>
+// <script>
   import {
     Timeline,
     TimelineItem,
@@ -138,50 +171,168 @@
   } from 'vue-cute-timeline'
   import Carousel from '@/components/Carousel'
   import Features from '@/components/Features'
-  import theprogress from '@/components/Progress'
-  var toPX = require('to-px')
-  // import ridgecrestimg from '@/assets/ridgecrest.jpg'
+  import Vue from 'vue'
+  import VueCollapse from 'vue2-collapse'
+  import VueCircle from 'vue2-circle-progress'
+  import $ from 'jquery'
+  import MobileDetect from 'mobile-detect'
+  const VueScrollTo = require('vue-scrollto')
+  Vue.use(VueScrollTo)
+  Vue.use(VueCollapse)
+  var md = new MobileDetect(window.navigator.userAgent)
   
   export default {
     name: 'hello',
     data() {
       return {
-        completedSteps: 0,
-        totalSteps: 10,
-        name: '', // data for the name on the form
-        email: '', // data for the email on the form
-        message: '', // data for the message on the form
-        maxLength: 140 // maximum length of the form message
+        actions: [
+          {
+            id: 1,
+            icon: 'fa-search',
+            item: 'Identify Parcel Owners'
+          },
+          {
+            id: 2,
+            icon: 'fa-envelope',
+            item: 'Get the Word Out'
+          },
+          {
+            id: 3,
+            icon: 'fa-edit',
+            item: 'Obtain Owner Signature'
+          },
+          {
+            id: 4,
+            icon: 'fa-share-square',
+            item: 'Submit Petitions'
+          },
+          {
+            id: 5,
+            icon: 'fa-clock',
+            item: 'Conduct Analysis'
+          },
+          {
+            id: 6,
+            icon: 'fa-gavel',
+            item: 'Participate in Hearing'
+          },
+          {
+            id: 7,
+            icon: 'fa-check',
+            item: 'Receive Approval'
+          }
+        ],
+        progress: [
+          {
+            id: 1,
+            street: 'Ridge Crest Dr',
+            completed: 0
+          },
+          {
+            id: 2,
+            street: 'Redfield Ln',
+            completed: 0
+          },
+          {
+            id: 3,
+            street: 'Heritage Woods Dr',
+            completed: 0
+          }
+        ],
+        questions: [
+          {
+            id: 1,
+            question: 'Does the sidewalk have to be on both sides?',
+            answer: 'No',
+            toggled: false
+          },
+          {
+            id: 2,
+            question: 'What if everyone doesn\'t participate?',
+            answer: 'The project can be scoped to a portion of the overall goal.',
+            toggled: false
+          },
+          {
+            id: 3,
+            question: 'How much will it cost?',
+            answer: 'If it costs too much after engineering analysis, you don’t have to pay.',
+            toggled: false
+          },
+          {
+            id: 4,
+            question: 'How is the cost for each parcel calculated?',
+            answer: 'Cost is attributed to square footage using depth, length and width.',
+            toggled: false
+          },
+          {
+            id: 5,
+            question: 'How do we pay for it?',
+            answer: 'Tax assessment paid by land owners to Town of Copley.',
+            toggled: false
+          }
+        ],
+        info: [
+          {
+            id: 1,
+            message: 'New Copley subdivisions are beginning to require sidewalks.'
+          },
+          {
+            id: 2,
+            message: 'Copley is embarking on a “Complete Streets” effort: proposing streets that are inclusive of pedestrians, cyclists, and people in wheelchairs.'
+          },
+          {
+            id: 3,
+            message: 'Every intersection requires handicap cross sections.'
+          },
+          {
+            id: 4,
+            message: 'If any parcel has a hill, right-of-way may have to be obtained.'
+          }
+        ],
+        form: {
+          name: '', // data for the name on the form
+          email: '', // data for the email on the form
+          message: '' // data for the message on the form
+        },
+        activeNavItem: '',
+        isMobile: false
+      }
+    },
+    created: function() {
+      // window.addEventListener('scroll', this.handleScroll)
+      this.$root.$on('bv::scrollspy::activate', this.onActivate)
+    },
+    destroyed: function() {
+      // window.removeEventListener('scroll', this.handleScroll)
+    },
+    computed: {
+      isValidName: function() {
+        var regex = /^[ ]/
+        return this.form.name.length > 0 && !regex.test(this.form.name)
+      },
+      isValidEmail: function() {
+        var regex = /^.+@.+$/
+        return regex.test(this.form.email)
+      },
+      isValidMessage: function() { // what is message is just spaces?
+        var regex = /^[ ]/
+        return this.form.message.length > 0 && !regex.test(this.form.message)
       }
     },
     methods: { // all the actions our app can do
-      isValidName: function() { // TODO what if name is just spaces?
-        var valid = this.name.length > 0
-        return valid
-      },
-      isValidEmail: function() { // TODO is a@b a valid email?
-        var valid = this.email.indexOf('@') > 0
-        return valid
-      },
-      isValidMessage: function() { // what is message is just spaces?
-        var valid = (this.message.length > 0) && (this.message.length < this.maxLength)
-        return valid
-      },
       checkMessage: function() {
         // TODO keep the message below maxMessageLength?
         //      or maybe change the text, background, or counter color?
       },
-      submitForm: function() {
-        // TODO prevent form from submitting if name, email, or message
-        //      are invalid and display message
-        // TODO submit to form processor
+      submitForm: function(evt) {
+        evt.preventDefault()
         this.$http({
           url: '/someUrl',
           method: 'POST',
           data: {
-            name: this.name,
-            email: this.email,
-            message: this.message
+            name: this.form.name,
+            email: this.form.email,
+            message: this.form.message
           }
         }).then(function() {
           alert('Your form was submitted!')
@@ -189,15 +340,18 @@
           alert('Form submission failed')
         })
       },
-      vh2px: function(value) {
-        // var w = window
-        // var d = document
-        // var e = d.documentElement
-        // var g = d.getElementsByTagName('body')[0]
-        // var y = w.innerHeight || e.clientHeight || g.clientHeight
-
-        // var result = (y * value) / 100
-        return toPX(value)
+      onActivate: function(target) {
+        // console.log('Receved Event: scrollspy::activate for target ', target)
+        this.activeNavItem = $(target).attr('name')
+        this.isMobile = md.mobile()
+      },
+      scrollTo: function(evt) {
+        // evt.preventDefault()
+        console.log(evt)
+        this.$scrollTo(evt, 2000)
+        $('html, body').animate({
+          scrollTop: $(evt).offset().top
+        }, 2000)
       }
     },
     components: {
@@ -206,46 +360,73 @@
       TimelineTitle,
       Carousel,
       Features,
-      theprogress
+      VueCircle
     }
   }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  /* #rcsp-map {
+  .jumbotron {
     height: 100vh;
-  } */
+    /* background-image: url("../assets/ridgecrest.jpg") !important; */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    /* background-color: rgb(201, 76, 76,.5) !important; */
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.5) 100%), url("../assets/cross-road2.jpg");
+    position: fixed;
+  }
 
-  #j-header {
-    transform: translateX(100);
+  .j-button{
+    position: absolute;
+    bottom:0;  
+  }
+  .navbar-nav>li {
+    padding-left: 30px;
+    padding-right: 30px;
+    text-align: center;
+  }
+  
+  #gmap {
+    position: relative;
+    height: 75vh;
+    /* width: 100vw; */
+  }
+
+  .rcsp-info {
+    margin-top: 1em;
+    min-width: 25%;
   }
 
   .btn-circle {
     width: 60px;
     height: 60px;
     border-radius: 30px;
-    /* padding: 6px 0px; */
-    /* text-align: center; */
-    /* font-size: 12px; */
-    /* line-height: 1.42857; */
-}
-
-.jumbotron{
+  }
+  
+  .full-page {
     height: 100vh;
+    width: 100vw;
+  }
+
+  .v-collapse-content{
+    max-height: 0;
+    transition: max-height 0.3s ease-out;
+    overflow: hidden;
+    padding: 0;
 }
 
-.jumbotron {
-background: linear-gradient(
-      rgba(24, 23, 23, 0.493)
-      ),url("../assets/ridgecrest.jpg");
-background-position: center; 
-background-size: cover;
+.v-collapse-content-end{
+    transition: max-height 0.1s ease-in;
+    max-height: 500px;
 }
-
-.navbar-nav > li{
-  padding-left:30px;
-  padding-right:30px;
-  text-align: center;
+.btn {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
 }
 </style>

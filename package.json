@@ -14,17 +14,23 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
+    "aos": "^2.3.2",
     "bootstrap": "^4.1.1",
     "bootstrap-material-design": "^4.1.1",
     "bootstrap-vue": "^2.0.0-rc.11",
+    "g": "^2.0.1",
+    "mobile-detect": "^1.4.2",
+    "npm-watch": "^0.3.0",
     "popper.js": "^1.12.9",
+    "scrollreveal": "^3.4.0",
     "to-px": "^1.0.1",
     "vue": "^2.5.2",
     "vue-cute-timeline": "^1.2.4",
     "vue-radial-progress": "^0.2.10",
     "vue-router": "^3.0.1",
     "vue-scrollto": "^2.11.0",
-    "vue2-circle-progress": "^1.2.3"
+    "vue2-circle-progress": "^1.2.3",
+    "vue2-collapse": "^1.0.15"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

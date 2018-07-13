@@ -1,30 +1,40 @@
 <template>
-  <b-row>
-    <b-col>
-      <b-card title="Safety"  img-top tag="article" style="max-width: 20rem;" class="mx-auto mb-4">
+  <!-- <b-row>
+    <b-col> -->
+      <b-card-group columns deck>
+      <b-card header="Safety"  style="max-width: 20rem;" class="mx-4 mb-4">
         <p style="" class="card-text">
-          Some quick example text to build on the card title and make up the bulk of the card's content.
+          Reduced chance of accidents.
         </p>
         <!-- <b-button href="#" variant="primary">Go somewhere</b-button> -->
       </b-card>
-    </b-col>
-    <b-col>
-      <b-card title="Home Value"  img-top tag="article" style="max-width: 20rem;" class="mx-auto mb-4">
+    <!-- </b-col>
+    <b-col> -->
+      <b-card header="Health" style="max-width: 20rem;" class="mx-4 mb-4">
         <p class="card-text">
-          Some quick example text to build on the card title and make up the bulk of the card's content.
+          People are more likely to exercise.
         </p>
         <!-- <b-button href="#" variant="primary">Go somewhere</b-button> -->
       </b-card>
-    </b-col>
-    <b-col>
-      <b-card title="More attractive community"  img-alt="Image" img-top tag="article" style="max-width: 20rem;" class="mx-auto mb-4">
+    <!-- </b-col>
+    <b-col> -->
+      <b-card header="Lower Crime" style="max-width: 20rem;" class="mx-4 mb-4">
         <p class="card-text">
-          Some quick example text to build on the card title and make up the bulk of the card's content.
+          More pedestrian traffic reduces criminal activity.
         </p>
         <!-- <b-button href="#" variant="primary">Go somewhere</b-button> -->
       </b-card>
-    </b-col>
-  </b-row>
+    <!-- </b-col>
+    <b-col> -->
+      <b-card header="Value" style="max-width: 20rem;" class="mx-4 mb-4">
+        <p class="card-text">
+          Buyers may be more willing to purchase in an area with sidewalks.
+        </p>
+        <!-- <b-button href="#" variant="primary">Go somewhere</b-button> -->
+      </b-card>
+    <!-- </b-col>
+  </b-row> -->
+  </b-card-group>
 </template>
 
 <script>

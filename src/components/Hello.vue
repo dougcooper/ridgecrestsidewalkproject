@@ -1,6 +1,6 @@
 <template>
   <b-card no-body>
-    <b-card-body id="nav-scroller" ref="content" style="position:relative; height:98vh; overflow-y:scroll;" class="p-0">
+    <b-card-body id="nav-scroller" ref="content" style="position:relative; height:100vh; overflow-y:scroll;" class="p-0">
       <b-jumbotron fluid
                   class="m-0 text-center" 
                   style="position:relative; font-family: Arial, Helvetica, sans-serif" 
@@ -8,7 +8,7 @@
                   header-level="3"
                   bg-variant="dark" text-variant="light">
                   <h3 :slot="lead">An effort to complete the sidewalk along Ridge Crest Drive and adjacent streets</h3>
-                  <p>Scroll down to learn more</p>
+                  <!-- <p>Scroll down to learn more</p> -->
                   <div align="center" class="">
                     <b-button @click="scrollTo('#rcsp-issues')" class="mb-4">
                       <img :src="require('@/components/circle.png')" width="50" height="50"/>
@@ -16,18 +16,22 @@
                   </div>
       </b-jumbotron>
       <b-navbar toggleable="sm" sticky="true" type="dark" variant="dark" style=";" class="" >
-        <b-navbar-brand><b-img :src="require('@/components/ridge_crest_logo2.svg')" width="100" height="50" ></b-img></b-navbar-brand>
-        <h3 v-if="isMobile" class="text-white text-canter" >{{activeNavItem}}</h3>
+        <b-navbar-brand>
+          <b-row>
+            <b-col><b-img :src="require('@/components/ridge_crest_logo2.svg')" width="100" height="50" class="pb-2"/></b-col>
+            <b-col align-self="center"><h3 v-if="isMobile" class="text-white text-canter m-0" >{{activeNavItem}}</h3></b-col>
+          </b-row>
+        </b-navbar-brand>
         <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
         <b-collapse is-nav id="nav_collapse">
           <b-navbar-nav fill pills v-b-scrollspy:nav-scroller class="" style="">
-            <b-nav-item href="#rcsp-issues" class="">
+            <b-nav-item href='#rcsp-issues' class="">
               <i class="fa fa-exclamation-triangle fa-lg"></i> Issues
             </b-nav-item>
-            <b-nav-item href="#rcsp-benefits">
+            <b-nav-item href='#rcsp-benefits'>
               <i class="fa fa-thumbs-up fa-lg"></i> Benefits
             </b-nav-item>
-            <b-nav-item href="#rcsp-map">
+            <b-nav-item href='#rcsp-map'>
               <i class="fa fa-map-marker fa-lg"></i> Map
             </b-nav-item>
             <b-nav-item href="#rcsp-process">
@@ -53,7 +57,7 @@
         <carousel/>
       </b-container>
       <b-container fluid class="px-0" id="rcsp-benefits" name="Benefits" >
-        <br><br><br>
+        <br><br><br><br>
         <features/>
       </b-container>
       <b-container fluid class="px-0" id="rcsp-map" name="Map" >
@@ -117,48 +121,33 @@
         </b-list-group>
         <br><br><br><br>
       </b-container>
-      <b-container fluid id="rcsp-support" class="bg-dark text-white" style="" name="Support" >
-        <br><br><br><br>
-        <h2 class="text-center">Let us know if you're interested?</h2>
-        <p class="text-center">Questions, comments and concerns are welcome</p>
-        <b-form id="contact_form" class="mx-auto" style="width:90%;" @submit="submitForm" action="">
-          <b-form-group class="" label="Name:" label-for="name">
-            <b-form-input required v-model="form.name" :state="isValidName" name="name" type="text" placeholder="Enter you name"/>
-          </b-form-group>
-          <b-form-group class="form-group" label="Email" label-for="email">
-            <b-form-input required v-model="form.email" :state="isValidEmail" name="email" type="email" placeholder="youremail@domain"/>
-          </b-form-group>
-          <b-form-group class="form-group" label="Message">
-            <b-form-textarea required v-model="form.message" :state="isValidMessage" name="message" :rows="6" :max-rows="12" class="" ></b-form-textarea>
-          </b-form-group>
-          <b-button type="submit" class="btn btn-dark">Send</b-button>
-        </b-form>
-        <br>
-      </b-container>
-      <footer class="page-footer font-small bg-dark">
-        <br>
-        <ul class="list-unstyled list-inline text-center">
-          <li class="list-inline-item">
-            <b-button class="btn btn-dark btn-lg btn-circle" href="https://fb.me/rcspcopley">
-              <i class="fab fa-facebook-f fa-lg"> </i>
-            </b-button>
-          </li>
-          <li class="list-inline-item">
-            <b-button class="btn btn-dark btn-lg btn-circle" href="https://twitter.com/rcsp7">
-              <i class="fab fa-twitter fa-lg"></i>
-            </b-button>
-          </li>
-          <li class="list-inline-item">
-            <b-button class="btn btn-dark btn-lg btn-circle" href="https://plus.google.com/u/2/109929461810031001399">
-              <i class="fab fa-google-plus-g fa-lg"></i>
-            </b-button>
-          </li>
-        </ul>
-        <div class="footer-copyright text-center py-3">
-          <p class="text-white">Ridge Crest Sidewalk Project</p>
-        </div>
-      </footer>
-      
+      <b-jumbotron fluid id="rcsp-support" name="Support"
+                  class="m-0 text-center" 
+                  style="position:relative; font-family: Arial, Helvetica, sans-serif" 
+                  header-level="3"
+                  bg-variant="dark" text-variant="light">
+                  <br><br><br><br>
+                  <h1 :slot="header" class="text-center">Let us know if you're interested</h1>
+                  <p :slot="lead">Send us an <a href="mailto:ridgecrestsp@gmail.com">email</a> or connect with us by clicking one of the links below.</p>
+                  <br>
+                  <ul class="list-unstyled list-inline text-center">
+                    <li class="list-inline-item">
+                      <b-button class="btn btn-dark btn-lg btn-circle" href="https://fb.me/rcspcopley">
+                        <i class="fab fa-facebook-f fa-lg"> </i>
+                      </b-button>
+                    </li>
+                    <li class="list-inline-item">
+                      <b-button class="btn btn-dark btn-lg btn-circle" href="https://twitter.com/rcsp7">
+                        <i class="fab fa-twitter fa-lg"></i>
+                      </b-button>
+                    </li>
+                    <li class="list-inline-item">
+                      <b-button class="btn btn-dark btn-lg btn-circle" href="https://plus.google.com/u/2/109929461810031001399">
+                        <i class="fab fa-google-plus-g fa-lg"></i>
+                      </b-button>
+                    </li>
+                  </ul>
+      </b-jumbotron>
     </b-card-body>
   </b-card>
 </template>
@@ -180,6 +169,10 @@
   Vue.use(VueScrollTo)
   Vue.use(VueCollapse)
   var md = new MobileDetect(window.navigator.userAgent)
+
+  $(window).on('activate.bs.scrollspy', function(e) {
+    history.replaceState({}, '', $('.nav-item .active').attr('href'))
+  })
   
   export default {
     name: 'hello',
@@ -324,34 +317,15 @@
         // TODO keep the message below maxMessageLength?
         //      or maybe change the text, background, or counter color?
       },
-      submitForm: function(evt) {
-        evt.preventDefault()
-        this.$http({
-          url: '/someUrl',
-          method: 'POST',
-          data: {
-            name: this.form.name,
-            email: this.form.email,
-            message: this.form.message
-          }
-        }).then(function() {
-          alert('Your form was submitted!')
-        }, function() {
-          alert('Form submission failed')
-        })
-      },
       onActivate: function(target) {
-        // console.log('Receved Event: scrollspy::activate for target ', target)
         this.activeNavItem = $(target).attr('name')
         this.isMobile = md.mobile()
+        history.replaceState({}, '', $('.nav-item .active').attr('href'))
       },
       scrollTo: function(evt) {
-        // evt.preventDefault()
-        console.log(evt)
-        this.$scrollTo(evt, 2000)
-        $('html, body').animate({
-          scrollTop: $(evt).offset().top
-        }, 2000)
+        $('#nav-scroller').animate({
+          scrollTop: $(evt).parent().scrollTop() + $(evt).offset().top - $(evt).parent().offset().top
+        }, 750)
       }
     },
     components: {
@@ -369,13 +343,21 @@
 <style scoped>
   .jumbotron {
     height: 100vh;
-    /* background-image: url("../assets/ridgecrest.jpg") !important; */
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    /* background-color: rgb(201, 76, 76,.5) !important; */
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.5) 100%), url("../assets/ridgecrest.jpg");
+    /* position: fixed; */
+  }
+
+  #rcsp-support {
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    
     background-image: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.5) 100%), url("../assets/cross-road2.jpg");
-    position: fixed;
+    
   }
 
   .j-button{

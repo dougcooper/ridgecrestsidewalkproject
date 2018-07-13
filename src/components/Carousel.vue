@@ -3,7 +3,7 @@
                 style=""
                 controls
                 indicators
-                background="#ababab"
+                background=""
                 :interval="0"
                 v-model="slide"
                 @sliding-start="onSlideStart"

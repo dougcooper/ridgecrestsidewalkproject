@@ -1,6 +1,7 @@
 <template>
-  <b-card no-body>
-    <b-card-body id="nav-scroller" ref="content" style="position:relative; height:100vh; overflow-y:scroll;" class="p-0">
+<div>
+  <!-- <b-card no-body> -->
+    <!-- <b-card-body id="nav-scroller" ref="content" style="position:relative; height:100vh; overflow-y:scroll;" class="p-0"> -->
       <b-jumbotron fluid
                   class="m-0 text-center" 
                   style="position:relative; font-family: Arial, Helvetica, sans-serif" 
@@ -8,14 +9,14 @@
                   header-level="3"
                   bg-variant="dark" text-variant="light">
                   <h3 :slot="lead">An effort to complete the sidewalk along Ridge Crest Drive and adjacent streets</h3>
-                  <!-- <p>Scroll down to learn more</p> -->
+                  <p>Scroll down to learn more or click <a href="#" @click="scrollTo('#rcsp-support')"><b>here</b></a> to support</p>
                   <div align="center" class="">
                     <b-button @click="scrollTo('#rcsp-issues')" class="mb-4">
                       <img :src="require('@/components/circle.png')" width="50" height="50"/>
                     </b-button>
                   </div>
       </b-jumbotron>
-      <b-navbar toggleable="sm" sticky="true" type="dark" variant="dark" style=";" class="" >
+      <!-- <b-navbar toggleable="sm" sticky="true" type="dark" variant="dark" style=";" class="" >
         <b-navbar-brand>
           <b-row>
             <b-col><b-img :src="require('@/components/ridge_crest_logo2.svg')" width="100" height="50" class="pb-2"/></b-col>
@@ -51,21 +52,29 @@
             </b-nav-item>
           </b-navbar-nav>
         </b-collapse>
-      </b-navbar>
+      </b-navbar> -->
       <b-container  fluid class="px-0" id="rcsp-issues" name="Issues">
-        <br><br><br>
+        <br><br>
+        <h1 class="text-center">Issues</h1>
+        <br><br>
         <carousel/>
       </b-container>
       <b-container fluid class="px-0" id="rcsp-benefits" name="Benefits" >
-        <br><br><br><br>
+        <br><br>
+        <h1 class="text-center">Benefits</h1>
+        <br><br>
         <features/>
       </b-container>
       <b-container fluid class="px-0" id="rcsp-map" name="Map" >
-        <br><br><br><br>
+        <br><br>
+        <h1 class="text-center">Map</h1>
+        <br><br>
         <b-embed style="" id="gmap" type="iframe" aspect="" src="https://www.google.com/maps/d/u/0/embed?mid=15U0H8mVvYEiDeIDQaSW3iyQtWsA6Ikdq"></b-embed>
       </b-container>
       <b-container id="rcsp-process" name="Process" >
-        <br><br><br>
+        <br><br>
+        <h1 class="text-center">Process</h1>
+        <br><br>
         <timeline class="mx-auto" style="width: 200px;">
           <timeline-item class="ml-3" v-for="(action,index) in actions" :key="action.id">
             <i slot="others" class="fas fa-2x" :class="action.icon"></i>
@@ -77,7 +86,9 @@
         </timeline>
       </b-container>
       <b-container id="rcsp-progress" class="p-3" name="Progress" >
-        <br><br><br><br>
+        <br><br>
+        <h1 class="text-center">Progress</h1>
+        <br><br>
         <div class="row p-3">
           <div class="col-sm text-center" v-for="location in progress" :key="location.id">
             <vue-circle :progress="location.completed" 
@@ -100,7 +111,9 @@
         <br><br>
       </b-container>
       <b-container fluid id="rcsp-faq" class="" style="background-color: white;" name="FAQ" >
-        <br><br><br><br>
+        <br><br>
+        <h1 class="text-center">FAQ</h1>
+        <br><br>
         <v-collapse-group :onlyOneActive="true" class="list-group">
           <v-collapse-wrapper class="list-group-item list-group-item-action" v-for="qa in questions" :key="qa.id" v-on:onStatusChange="qa.toggled=!qa.toggled">
               <div v-collapse-toggle>
@@ -112,14 +125,16 @@
               </div>
           </v-collapse-wrapper>
         </v-collapse-group>
-        <br><br><br><br>
+        <br><br>
       </b-container>
       <b-container fluid id="rcsp-info" name="Info" >
-        <br><br><br><br>
+        <br><br>
+        <h1 class="text-center">Info</h1>
+        <br><br>
         <b-list-group>
           <b-list-group-item href="#" v-for="item in info" :key="item.id">{{item.message}}</b-list-group-item>
         </b-list-group>
-        <br><br><br><br>
+        <br><br>
       </b-container>
       <b-jumbotron fluid id="rcsp-support" name="Support"
                   class="m-0 text-center" 
@@ -128,7 +143,8 @@
                   bg-variant="dark" text-variant="light">
                   <br><br><br><br>
                   <h1 :slot="header" class="text-center">Let us know if you're interested</h1>
-                  <p :slot="lead">Send us an <a href="mailto:ridgecrestsp@gmail.com">email</a> or connect with us by clicking one of the links below.</p>
+                  <p :slot="lead">Send us an <a href="mailto:ridgecrestsp@gmail.com"><b>email</b></a> 
+                    and connect with us by clicking one of the links below.</p>
                   <br>
                   <ul class="list-unstyled list-inline text-center">
                     <li class="list-inline-item">
@@ -148,8 +164,9 @@
                     </li>
                   </ul>
       </b-jumbotron>
-    </b-card-body>
-  </b-card>
+      </div>
+    <!-- </b-card-body> -->
+  <!-- </b-card> -->
 </template>
 
 // <script>
@@ -242,19 +259,22 @@
           {
             id: 2,
             question: 'What if everyone doesn\'t participate?',
-            answer: 'The project can be scoped to a portion of the overall goal.',
+            answer: 'The project can be scoped to a portion of the overall goal, but we need 51% ' +
+            'for a particular stretch of road.',
             toggled: false
           },
           {
             id: 3,
             question: 'How much will it cost?',
-            answer: 'If it costs too much after engineering analysis, you don’t have to pay.',
+            answer: 'The town cannot provide and estimate, but if it costs too much after ' +
+            'engineering analysis you opt out at the hearing.',
             toggled: false
           },
           {
             id: 4,
             question: 'How is the cost for each parcel calculated?',
-            answer: 'Cost is attributed to square footage using depth, length and width.',
+            answer: 'Cost is attributed to square footage using depth, length and width. ' +
+            'Basically you may end up paying a bit more if you have a larger property.',
             toggled: false
           },
           {
@@ -323,7 +343,7 @@
         history.replaceState({}, '', $('.nav-item .active').attr('href'))
       },
       scrollTo: function(evt) {
-        $('#nav-scroller').animate({
+        $('html, body').animate({
           scrollTop: $(evt).parent().scrollTop() + $(evt).offset().top - $(evt).parent().offset().top
         }, 750)
       }

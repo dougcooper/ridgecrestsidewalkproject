@@ -1,7 +1,7 @@
 {
-  "name": "bootstraptest",
+  "name": "ridgecrestsidewalkproject",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "A sidewalk integration project in Copley, OH.",
   "author": "Doug Cooper",
   "private": true,
   "scripts": {

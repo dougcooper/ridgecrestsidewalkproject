@@ -11,7 +11,8 @@
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
-    "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
+    "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "aos": "^2.3.2",
@@ -19,6 +20,7 @@
     "bootstrap-material-design": "^4.1.1",
     "bootstrap-vue": "^2.0.0-rc.11",
     "g": "^2.0.1",
+    "gh-pages": "^1.2.0",
     "mobile-detect": "^1.4.2",
     "npm-watch": "^0.3.0",
     "popper.js": "^1.12.9",

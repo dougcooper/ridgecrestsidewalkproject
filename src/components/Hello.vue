@@ -1,8 +1,7 @@
 <template>
 <div>
-  <!-- <b-card no-body> -->
-    <!-- <b-card-body id="nav-scroller" ref="content" style="position:relative; height:100vh; overflow-y:scroll;" class="p-0"> -->
-      <b-jumbotron fluid
+    <div id="nav-scroller">
+      <b-jumbotron fluid sticky
                   class="m-0 text-center" 
                   style="position:relative; font-family: Arial, Helvetica, sans-serif" 
                   header="Ridge Crest Sidewalk Project" 
@@ -16,78 +15,48 @@
                     </b-button>
                   </div>
       </b-jumbotron>
-      <!-- <b-navbar toggleable="sm" sticky="true" type="dark" variant="dark" style=";" class="" >
-        <b-navbar-brand>
-          <b-row>
-            <b-col><b-img :src="require('@/components/ridge_crest_logo2.svg')" width="100" height="50" class="pb-2"/></b-col>
-            <b-col align-self="center"><h3 v-if="isMobile" class="text-white text-canter m-0" >{{activeNavItem}}</h3></b-col>
-          </b-row>
-        </b-navbar-brand>
-        <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-        <b-collapse is-nav id="nav_collapse">
-          <b-navbar-nav fill pills v-b-scrollspy:nav-scroller class="" style="">
-            <b-nav-item href='#rcsp-issues' class="">
-              <i class="fa fa-exclamation-triangle fa-lg"></i> Issues
-            </b-nav-item>
-            <b-nav-item href='#rcsp-benefits'>
-              <i class="fa fa-thumbs-up fa-lg"></i> Benefits
-            </b-nav-item>
-            <b-nav-item href='#rcsp-map'>
-              <i class="fa fa-map-marker fa-lg"></i> Map
-            </b-nav-item>
-            <b-nav-item href="#rcsp-process">
-              <i class="fa fa-list-ol fa-lg"></i> Process
-            </b-nav-item>
-            <b-nav-item href="#rcsp-progress">
-              <i class="fa fa-spinner fa-lg"></i> Progress
-            </b-nav-item>
-            <b-nav-item href="#rcsp-faq">
-              <i class="fa fa-question-circle fa-lg"></i> FAQ
-            </b-nav-item>
-            <b-nav-item href="#rcsp-info">
-              <i class="fa fa-info-circle fa-lg"></i> Info
-            </b-nav-item>
-            <b-nav-item href="#rcsp-support">
-              <i class="fa fa-life-ring fa-lg"></i> Support
-            </b-nav-item>
-          </b-navbar-nav>
-        </b-collapse>
-      </b-navbar> -->
       <b-container  fluid class="px-0" id="rcsp-issues" name="Issues">
-        <br><br>
-        <h1 class="text-center">Issues</h1>
+        <br><br><br>
+        <h1 class="text-center">Why do we need sidewalks?</h1>
         <br><br>
         <carousel/>
       </b-container>
       <b-container fluid class="px-0" id="rcsp-benefits" name="Benefits" >
         <br><br>
-        <h1 class="text-center">Benefits</h1>
+        <h1 class="text-center">What are the additional benefits?</h1>
         <br><br>
         <features/>
       </b-container>
       <b-container fluid class="px-0" id="rcsp-map" name="Map" >
         <br><br>
-        <h1 class="text-center">Map</h1>
+        <h1 class="text-center">What are the proposed routes?</h1>
         <br><br>
         <b-embed style="" id="gmap" type="iframe" aspect="" src="https://www.google.com/maps/d/u/0/embed?mid=15U0H8mVvYEiDeIDQaSW3iyQtWsA6Ikdq"></b-embed>
       </b-container>
-      <b-container id="rcsp-process" name="Process" >
+      <b-container id="rcsp-process" name="Process" class="mx-auto mx-2">
         <br><br>
-        <h1 class="text-center">Process</h1>
+        <h1 class="text-center">What is the process for moving forward?</h1>
         <br><br>
-        <timeline class="mx-auto" style="width: 200px;">
-          <timeline-item class="ml-3" v-for="(action,index) in actions" :key="action.id">
+        <timeline class="" style="">
+          <timeline-item class="pl-3" v-for="(action,index) in actions" :key="action.id">
             <i slot="others" class="fas fa-2x" :class="action.icon"></i>
             <b-container>
-              <b-row class="font-italic" >Step {{index+1}}</b-row>
-              <b-row>{{action.item}}</b-row>
+              <b-row >
+                <b-col>
+                  <b-row class="font-italic" >Step {{index+1}}</b-row>
+                  <b-row><b>{{action.item}}</b></b-row>
+                </b-col>
+                <b-col class="" sm="9">
+                  <p>{{action.description}}</p>
+                </b-col>
+              </b-row>
             </b-container>
           </timeline-item>
         </timeline>
       </b-container>
       <b-container id="rcsp-progress" class="p-3" name="Progress" >
         <br><br>
-        <h1 class="text-center">Progress</h1>
+        <h1 class="text-center">How many signatures obtained so far?</h1>
         <br><br>
         <div class="row p-3">
           <div class="col-sm text-center" v-for="location in progress" :key="location.id">
@@ -129,7 +98,7 @@
       </b-container>
       <b-container fluid id="rcsp-info" name="Info" >
         <br><br>
-        <h1 class="text-center">Info</h1>
+        <h1 class="text-center">Additional Info</h1>
         <br><br>
         <b-list-group>
           <b-list-group-item href="#" v-for="item in info" :key="item.id">{{item.message}}</b-list-group-item>
@@ -144,7 +113,7 @@
                   <br><br><br><br>
                   <h1 :slot="header" class="text-center">Let us know if you're interested</h1>
                   <p :slot="lead">Send us an <a href="mailto:ridgecrestsp@gmail.com"><b>email</b></a> 
-                    and connect with us by clicking one of the links below.</p>
+                    and connect with us to stay up to date.</p>
                   <br>
                   <ul class="list-unstyled list-inline text-center">
                     <li class="list-inline-item">
@@ -165,11 +134,10 @@
                   </ul>
       </b-jumbotron>
       </div>
-    <!-- </b-card-body> -->
-  <!-- </b-card> -->
+    </div>
 </template>
 
-// <script>
+<script>
   import {
     Timeline,
     TimelineItem,
@@ -199,37 +167,44 @@
           {
             id: 1,
             icon: 'fa-search',
-            item: 'Identify Parcel Owners'
+            item: 'Identify Parcel Owners',
+            description: 'Create a list of every property, including all owners listed on the deed, along the proposed route.'
           },
           {
             id: 2,
             icon: 'fa-envelope',
-            item: 'Get the Word Out'
+            item: 'Get the Word Out',
+            description: 'Lines of communication will be established to provide information to property owners.'
           },
           {
             id: 3,
             icon: 'fa-edit',
-            item: 'Obtain Owner Signature'
+            item: 'Obtain Owner Signature',
+            description: 'The petition must be signed in blue ink by every individual whose name is on the deed.'
           },
           {
             id: 4,
             icon: 'fa-share-square',
-            item: 'Submit Petitions'
+            item: 'Submit Petitions',
+            description: 'Petitions will be submitted to the town of Copley for review.'
           },
           {
             id: 5,
             icon: 'fa-clock',
-            item: 'Conduct Analysis'
+            item: 'Conduct Analysis',
+            description: 'Once signatures have been obtained from 51% of property owners on a particular street segment, an engineer will be assigned to asses the feasibility and cost.'
           },
           {
             id: 6,
             icon: 'fa-gavel',
-            item: 'Participate in Hearing'
+            item: 'Participate in Hearing',
+            description: 'Prior to implementation a town hearing will be held to give all affected parties the opportunity to discuss the proposal.'
           },
           {
             id: 7,
             icon: 'fa-check',
-            item: 'Receive Approval'
+            item: 'Receive Approval',
+            description: 'Once the approval has been made the town will sell bonds to fund the installation, which may be partially back paid in taxes by residents.'
           }
         ],
         progress: [
@@ -252,35 +227,32 @@
         questions: [
           {
             id: 1,
-            question: 'Does the sidewalk have to be on both sides?',
+            question: 'Does the sidewalk have to be on both sides of the street?',
             answer: 'No',
             toggled: false
           },
           {
             id: 2,
             question: 'What if everyone doesn\'t participate?',
-            answer: 'The project can be scoped to a portion of the overall goal, but we need 51% ' +
-            'for a particular stretch of road.',
+            answer: 'The project can be scoped to a portion of the overall goal, but we need 51% for a particular stretch of road.',
             toggled: false
           },
           {
             id: 3,
             question: 'How much will it cost?',
-            answer: 'The town cannot provide and estimate, but if it costs too much after ' +
-            'engineering analysis you opt out at the hearing.',
+            answer: 'The town cannot provide an estimate yet, but if estimated costs from the engineering analysis are too much, you can voice concerns at the hearing.',
             toggled: false
           },
           {
             id: 4,
             question: 'How is the cost for each parcel calculated?',
-            answer: 'Cost is attributed to square footage using depth, length and width. ' +
-            'Basically you may end up paying a bit more if you have a larger property.',
+            answer: 'Cost is attributed to square footage using depth, length and width - you may end up paying a bit more if you have a larger property.',
             toggled: false
           },
           {
             id: 5,
             question: 'How do we pay for it?',
-            answer: 'Tax assessment paid by land owners to Town of Copley.',
+            answer: 'Potential tax assessment paid by land owners to Town of Copley after sale of bonds.',
             toggled: false
           }
         ],
@@ -291,22 +263,17 @@
           },
           {
             id: 2,
-            message: 'Copley is embarking on a “Complete Streets” effort: proposing streets that are inclusive of pedestrians, cyclists, and people in wheelchairs.'
+            message: 'Copley is embarking on a “Complete Streets” effort, proposing streets that are inclusive of pedestrians, cyclists, and people in wheelchairs.'
           },
           {
             id: 3,
-            message: 'Every intersection requires handicap cross sections.'
+            message: 'Every intersection requires a handicap cross sections.'
           },
           {
             id: 4,
             message: 'If any parcel has a hill, right-of-way may have to be obtained.'
           }
         ],
-        form: {
-          name: '', // data for the name on the form
-          email: '', // data for the email on the form
-          message: '' // data for the message on the form
-        },
         activeNavItem: '',
         isMobile: false
       }
@@ -340,7 +307,7 @@
       onActivate: function(target) {
         this.activeNavItem = $(target).attr('name')
         this.isMobile = md.mobile()
-        history.replaceState({}, '', $('.nav-item .active').attr('href'))
+        // history.replaceState({}, '', $('.nav-item .active').attr('href'))
       },
       scrollTo: function(evt) {
         $('html, body').animate({
